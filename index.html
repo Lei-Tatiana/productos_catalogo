@@ -4,18 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestión de Inventario - StockPro</title>
-  
-  <!-- CSS Externo -->
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Iconos Lucide -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
   <div class="container">
-    
-    <!-- Header -->
+
     <header class="main-header">
       <div class="header-content">
         <h1>
@@ -28,7 +23,6 @@
       </div>
     </header>
 
-    <!-- Resumen de Inventario (KPIs) -->
     <section class="kpi-grid">
       <div class="card kpi-card">
         <div class="kpi-icon blue"><i data-lucide="boxes"></i></div>
@@ -63,10 +57,8 @@
       </div>
     </section>
 
-    <!-- Layout principal de 2 columnas -->
     <main class="main-grid">
 
-      <!-- Formulario de Agregar / Editar -->
       <section class="card form-section">
         <div class="card-header">
           <h2 id="form-title"><i data-lucide="plus-circle"></i> Agregar Producto</h2>
@@ -110,10 +102,8 @@
         </form>
       </section>
 
-      <!-- Área de Productos + Filtros -->
       <section class="inventory-section">
-        
-        <!-- Filtros y Buscador -->
+
         <div class="card filter-card">
           <div class="filter-header">
             <h3><i data-lucide="filter"></i> Buscador y Filtros</h3>
@@ -123,7 +113,6 @@
           </div>
 
           <div class="filter-grid">
-            <!-- Buscar por Nombre / Categoría -->
             <div class="filter-group col-span-2">
               <label for="filter-search">Buscar Nombre / Categoría</label>
               <div class="input-icon">
@@ -132,7 +121,6 @@
               </div>
             </div>
 
-            <!-- Seleccionar Categoría -->
             <div class="filter-group">
               <label for="filter-category">Categoría</label>
               <select id="filter-category">
@@ -140,19 +128,16 @@
               </select>
             </div>
 
-            <!-- Estado de Stock -->
             <div class="filter-group">
               <label for="filter-stock-status">Estado del Stock</label>
               <select id="filter-stock-status">
-                <option value="all">Todos los productos</option>
-
-                <option value="in_stock">En Stock (> 5)</option>
-                <option value="low_stock">Bajo Stock (1 - 5)</option>
-                <option value="out_of_stock">Agotado (0)</option>
+                <option value="Todos">Todos los productos</option>
+                <option value="En stock">En Stock (> 5)</option>
+                <option value="Bajo stock">Bajo Stock (1 - 5)</option>
+                <option value="Sin stock">Agotado (0)</option>
               </select>
             </div>
 
-            <!-- Filtro Precio Máximo -->
             <div class="filter-group col-span-2">
               <div class="price-label-row">
                 <label for="filter-max-price">Precio Máximo:</label>
@@ -163,7 +148,6 @@
           </div>
         </div>
 
-        <!-- Encabezado de Resultados y Cambio de Vista -->
         <div class="products-header">
           <p id="results-count">Mostrando 0 productos</p>
           <div class="view-toggle">
@@ -176,7 +160,6 @@
           </div>
         </div>
 
-        <!-- Vista 1: Tabla de Productos -->
         <div id="table-container" class="card table-wrapper">
           <table class="product-table">
             <thead>
@@ -189,18 +172,12 @@
                 <th class="text-right">Acciones</th>
               </tr>
             </thead>
-            <tbody id="product-table-body">
-              <!-- Se genera dinámicamente con JS -->
-            </tbody>
+            <tbody id="product-table-body"></tbody>
           </table>
         </div>
 
-        <!-- Vista 2: Grilla de Tarjetas -->
-        <div id="grid-container" class="product-cards-grid hidden">
-          <!-- Se genera dinámicamente con JS -->
-        </div>
+        <div id="grid-container" class="product-cards-grid hidden"></div>
 
-        <!-- Mensaje de no hay resultados -->
         <div id="empty-state" class="card empty-state hidden">
           <i data-lucide="package-x"></i>
           <h3>No se encontraron productos</h3>
@@ -211,10 +188,8 @@
     </main>
   </div>
 
-  <!-- Contenedor para Notificaciones Toast -->
   <div id="toast-container" class="toast-container"></div>
 
-  <!-- JavaScript Externo -->
-  <script src="script.js"></script>
+  <script src="src/index.js"></script>
 </body>
 </html>
