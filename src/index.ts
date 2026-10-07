@@ -1,3 +1,5 @@
+// Visto en clase (actividades)
+
 const botonPrueba = document.querySelector<HTMLButtonElement>("#boton-prueba");
 const mensajePrueba = document.querySelector<HTMLParagraphElement>("#mensaje-prueba");
 const buscador = document.querySelector<HTMLInputElement>("#filter-search");
@@ -16,9 +18,9 @@ if (buscador !== null && mensajePrueba !== null) {
 }
 
 
-// Visto en clase :)
+// Interfaces
 interface Product {
-  id: string;
+  id: number;
   name: string;
   category: string;
   price: number;
@@ -34,6 +36,15 @@ interface Filters {
   stockStatus: "Todos" | StockStatus;
   maxPrice: number;
 }
+
+// Objetos
+
+const productos: Product[] = [
+  { id: 1, name: "Teclado", category: "Periféricos", price: 25000, stock: 8 },
+  { id: 2, name: "Mouse", category: "Periféricos", price: 15000, stock: 0 },
+  { id: 3, name: "Monitor", category: "Pantallas", price: 180000, stock: 4 }
+];
+
 
 declare const lucide: { createIcons: () => void };
 
@@ -91,14 +102,14 @@ function calculateKpis() {
 }
 
 function addProduct(data: Omit<Product, "id">): void {
-  products.push({ id: Date.now().toString(), ...data });
+  products.push({ id: Date.now(), ...data });
 }
 
-function updateProduct(id: string, data: Omit<Product, "id">): void {
+function updateProduct(id: number, data: Omit<Product, "id">): void {
   products = products.map((p) => (p.id === id ? { id, ...data } : p));
 }
 
-function deleteProduct(id: string): void {
+function deleteProduct(id: number): void {
   products = products.filter((p) => p.id !== id);
 }
 
@@ -172,10 +183,9 @@ function render(): void {
   renderProducts();
 }
 
-function startEdit(id: string): void {
+function startEdit(id: number): void {
   const p = products.find((x) => x.id === id);
   if (!p) return;
-  inputId.value = p.id;
   inputName.value = p.name;
   inputCategory.value = p.category;
   inputPrice.value = String(p.price);
@@ -211,7 +221,7 @@ function onSubmit(e: Event): void {
   };
 
   if (inputId.value) {
-    updateProduct(inputId.value, data);
+    updateProduct(Number(inputId.value), data);
     showToast("Producto actualizado");
   } else {
     addProduct(data);
@@ -229,9 +239,10 @@ function onTableOrGridClick(e: Event): void {
   const { action, id } = btn.dataset;
   if (!id) return;
 
-  if (action === "edit") startEdit(id);
+  const numericId = Number(id);
+  if (action === "edit") startEdit(numericId);
   if (action === "delete" && confirm("¿Eliminar este producto?")) {
-    deleteProduct(id);
+    deleteProduct(numericId);
     saveProducts();
     render();
     showToast("Producto eliminado");
