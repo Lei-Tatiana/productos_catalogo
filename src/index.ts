@@ -27,6 +27,14 @@ interface Product {
   stock: number;
 }
 
+const productos: Product[] = [
+  { id: 1, name: "Teclado", category: "Periféricos", price: 25000, stock: 8 },
+  { id: 2, name: "Mouse", category: "Periféricos", price: 15000, stock: 0 },
+  { id: 3, name: "Monitor", category: "Pantallas", price: 180000, stock: 4 },
+  { id: 4, name: "Notebook", category: "Computadoras", price: 350000, stock: 2 },
+  { id: 5, name: "Auriculares", category: "Audio", price: 20000, stock: 10 }
+];
+
 type StockStatus = "En stock" | "Bajo stock" | "Sin stock";
 type ViewMode = "table" | "grid";
 
@@ -66,9 +74,13 @@ const btnCancel = $<HTMLButtonElement>("btn-cancel");
 
 function loadProducts(): Product[] {
   const raw = localStorage.getItem(STORAGE_KEY);
-  return raw ? (JSON.parse(raw) as Product[]) : [];
+  if (raw) {
+    return JSON.parse(raw) as Product[];
+  }
+  // Si no hay nada guardado, usar los productos iniciales
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(productos));
+  return productos;
 }
-
 function saveProducts(): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
 }
